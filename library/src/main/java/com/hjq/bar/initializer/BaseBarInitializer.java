@@ -3,6 +3,7 @@ package com.hjq.bar.initializer;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,10 +15,10 @@ import android.widget.TextView;
 import com.hjq.bar.ITitleBarInitializer;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/TitleBar
- *    time   : 2020/09/19
- *    desc   : 默认初始化器基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/TitleBar
+ * time   : 2020/09/19
+ * desc   : 默认初始化器基类
  */
 public abstract class BaseBarInitializer implements ITitleBarInitializer {
 
@@ -92,12 +93,18 @@ public abstract class BaseBarInitializer implements ITitleBarInitializer {
     /**
      * 获取图片资源
      */
-    public static Drawable getDrawableResources(Context context, int id) {
+    public static Drawable getDrawableResources(Context context, int id, int tint) {
+        Drawable drawable;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return context.getResources().getDrawable(id, context.getTheme());
+            drawable = context.getResources().getDrawable(id, context.getTheme()).mutate();
         } else {
-            return context.getResources().getDrawable(id);
+            drawable = context.getResources().getDrawable(id).mutate();
         }
+        if (tint != 0) {
+            drawable = DrawableCompat.wrap(drawable);
+            DrawableCompat.setTint(drawable, tint);
+        }
+        return drawable;
     }
 
     /**

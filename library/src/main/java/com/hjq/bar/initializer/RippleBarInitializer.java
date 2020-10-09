@@ -39,7 +39,7 @@ public class RippleBarInitializer extends TransparentBarInitializer {
     public Drawable getRippleDrawable(Context context) {
         TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)) {
-            return getDrawableResources(context, typedValue.resourceId);
+            return getDrawableResources(context, typedValue.resourceId,0);
         }
         return null;
     }

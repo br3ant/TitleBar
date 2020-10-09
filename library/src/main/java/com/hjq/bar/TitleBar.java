@@ -25,31 +25,43 @@ import com.hjq.bar.initializer.RippleBarInitializer;
 import com.hjq.bar.initializer.TransparentBarInitializer;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/TitleBar
- *    time   : 2018/08/17
- *    desc   : Android 通用标题栏
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/TitleBar
+ * time   : 2018/08/17
+ * desc   : Android 通用标题栏
  */
 public class TitleBar extends FrameLayout
         implements View.OnClickListener,
         View.OnLayoutChangeListener {
 
-    /** 默认初始化器 */
+    /**
+     * 默认初始化器
+     */
     private static ITitleBarInitializer sGlobalInitializer;
-    /** 当前初始化器 */
+    /**
+     * 当前初始化器
+     */
     private final ITitleBarInitializer mCurrentInitializer;
 
-    /** 监听器对象 */
+    /**
+     * 监听器对象
+     */
     private OnTitleBarListener mListener;
 
-    /** 标题栏子 View */
+    /**
+     * 标题栏子 View
+     */
     private final TextView mLeftView, mTitleView, mRightView;
     private final View mLineView;
 
-    /** 控件内间距 */
+    /**
+     * 控件内间距
+     */
     private int mHorizontalPadding, mVerticalPadding;
 
-    /** 图标显示大小 */
+    /**
+     * 图标显示大小
+     */
     private int mDrawableSize = -1;
 
     public TitleBar(Context context) {
@@ -124,7 +136,8 @@ public class TitleBar extends FrameLayout
                             // 设置标题
                             setTitle(label);
                         }
-                    } catch (PackageManager.NameNotFoundException ignored) {}
+                    } catch (PackageManager.NameNotFoundException ignored) {
+                    }
                 }
             }
         }
@@ -135,7 +148,7 @@ public class TitleBar extends FrameLayout
 
         // 图标设置
         if (array.hasValue(R.styleable.TitleBar_leftIcon)) {
-            setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_leftIcon, 0)));
+            setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_leftIcon, 0), array.getColor(R.styleable.TitleBar_leftIconColor, 0)));
         } else {
             if (!array.getBoolean(R.styleable.TitleBar_backButton, true)) {
                 // 不显示返回图标
@@ -144,7 +157,7 @@ public class TitleBar extends FrameLayout
         }
 
         if (array.hasValue(R.styleable.TitleBar_rightIcon)) {
-            setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_rightIcon, 0)));
+            setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), array.getResourceId(R.styleable.TitleBar_rightIcon, 0), array.getColor(R.styleable.TitleBar_rightIconColor, 0)));
         }
 
         // 文字颜色设置
@@ -378,7 +391,7 @@ public class TitleBar extends FrameLayout
      * 设置左边的图标
      */
     public TitleBar setLeftIcon(int id) {
-        return setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setLeftIcon(BaseBarInitializer.getDrawableResources(getContext(), id,0));
     }
 
     public TitleBar setLeftIcon(Drawable drawable) {
@@ -401,7 +414,7 @@ public class TitleBar extends FrameLayout
      * 设置右边的图标
      */
     public TitleBar setRightIcon(int id) {
-        return setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setRightIcon(BaseBarInitializer.getDrawableResources(getContext(), id,0));
     }
 
     public TitleBar setRightIcon(Drawable drawable) {
@@ -448,7 +461,7 @@ public class TitleBar extends FrameLayout
      * 设置左标题状态选择器
      */
     public TitleBar setLeftBackground(int id) {
-        return setLeftBackground(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setLeftBackground(BaseBarInitializer.getDrawableResources(getContext(), id,0));
     }
 
     public TitleBar setLeftBackground(Drawable drawable) {
@@ -460,7 +473,7 @@ public class TitleBar extends FrameLayout
      * 设置右标题状态选择器
      */
     public TitleBar setRightBackground(int id) {
-        return setRightBackground(BaseBarInitializer.getDrawableResources(getContext(), id));
+        return setRightBackground(BaseBarInitializer.getDrawableResources(getContext(), id,0));
     }
 
     public TitleBar setRightBackground(Drawable drawable) {
@@ -506,6 +519,7 @@ public class TitleBar extends FrameLayout
     public TitleBar setLineColor(int color) {
         return setLineDrawable(new ColorDrawable(color));
     }
+
     public TitleBar setLineDrawable(Drawable drawable) {
         BaseBarInitializer.setViewBackground(mLineView, drawable);
         return this;

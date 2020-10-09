@@ -57,7 +57,7 @@ public class LightBarInitializer extends BaseBarInitializer {
 
     @Override
     public Drawable getBackIcon(Context context) {
-        return getDrawableResources(context, R.drawable.bar_arrows_left_black);
+        return getDrawableResources(context, R.drawable.bar_arrows_left_black,0);
     }
 
     @Override

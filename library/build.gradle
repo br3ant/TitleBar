@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 80
         versionName "8.0"
     }
@@ -45,4 +45,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives javadocJar
     archives sourcesJar
+}
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }

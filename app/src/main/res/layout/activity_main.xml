@@ -119,6 +119,7 @@
                 android:layout_marginTop="20dp"
                 app:leftIcon="@mipmap/ic_launcher"
                 app:rightIcon="@mipmap/ic_launcher"
+                app:rightIconColor="#000000"
                 app:title="带图标的标题栏" />
 
             <com.hjq.bar.TitleBar
